@@ -1,12 +1,13 @@
 // @flow
 
-import React, { PureComponent } from 'react';
-import { TextInput } from 'react-native';
-import { code } from 'currency-codes';
+import React, { PureComponent } from "react";
+import { TextInput } from "react-native";
+import { code } from "currency-codes";
 
 // Polyfill for Intl until properly supported in Android
-import 'intl';
-import 'intl/locale-data/jsonp/en';
+import "intl";
+import "intl/locale-data/jsonp/en";
+import "intl/locale-data/jsonp/es";
 
 type NumericTextInputType = "currency" | "decimal";
 
@@ -40,12 +41,12 @@ class NumericTextInput extends PureComponent<Props> {
   }
 
   createFormatConfig(props: Props): NumberFormatConfig {
-    const { locale = 'en-GB', type = 'decimal', useGrouping = true } = props;
+    const { locale = "es-ES", type = "decimal", useGrouping = true } = props;
     const typeOptions = {};
     let { decimalPlaces = 0 } = props;
 
-    if (type === 'currency') {
-      const { currency = 'GBP' } = props;
+    if (type === "currency") {
+      const { currency = "GBP" } = props;
 
       typeOptions.currency = currency;
       decimalPlaces = code(currency).digits;
@@ -59,13 +60,13 @@ class NumericTextInput extends PureComponent<Props> {
       useGrouping,
       divisor: Math.pow(10, decimalPlaces),
     });
-  };
+  }
 
   formatNumberValue(
     numberValue?: number,
     numberFormatConfig: NumberFormatConfig
   ): string {
-    let returnValue = '';
+    let returnValue = "";
 
     if (numberValue) {
       const { locale, ...config } = numberFormatConfig;
@@ -78,12 +79,12 @@ class NumericTextInput extends PureComponent<Props> {
 
   parseStringValue(
     text: string,
-    numberFormatConfig: NumberFormatConfig,
+    numberFormatConfig: NumberFormatConfig
   ): ?number {
     const digitsOnly = text.match(/\d+/g);
 
     return digitsOnly
-      ? parseInt(digitsOnly.join(''), 10) / numberFormatConfig.divisor
+      ? parseInt(digitsOnly.join(""), 10) / numberFormatConfig.divisor
       : undefined;
   }
 
