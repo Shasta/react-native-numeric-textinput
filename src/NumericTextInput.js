@@ -106,7 +106,7 @@ class NumericTextInput extends PureComponent<Props> {
         value={this.formatNumberValue(value, this.formatConfig)}
         keyboardType="number-pad"
         onChangeText={this.onUpdate}
-        caretHidden={true}
+        //caretHidden={true}
       />
     );
   }
